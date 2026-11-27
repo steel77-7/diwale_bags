@@ -1,23 +1,25 @@
 # ==============================================================================
 # Render Blueprint Configuration (render.yaml)
+# Backend + PostgreSQL on Render; Storefront hosted separately on Vercel.
 # ==============================================================================
 databases:
-  - name: highfashion-db
+  - name: dilwale-bags-db
     databaseName: medusa
     user: medusa
     plan: free
 
 services:
   # ----------------------------------------------------------------------------
-  # Medusa v2 Backend
+  # Dilwale Bags Medusa v2 Backend
   # ----------------------------------------------------------------------------
   - type: web
-    name: highfashion-backend
+    name: dilwale-bags-backend
     runtime: image
     image:
-      url: docker.io/steel777/highfashion-backend:latest
+      url: docker.io/steel777/dilwale-bags-backend:latest
     plan: free
     region: oregon
+    healthCheckPath: /health
     envVars:
       - key: PORT
         value: 9000
@@ -27,48 +29,23 @@ services:
         value: "--max-old-space-size=384"
       - key: DATABASE_URL
         fromDatabase:
-          name: highfashion-db
+          name: dilwale-bags-db
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: COOKIE_SECRET
         generateValue: true
       - key: STORE_CORS
-        value: https://highfashion-storefront.onrender.com
+        # Your Vercel URL, e.g. https://dilwale-bags.vercel.app
+        sync: false
       - key: ADMIN_CORS
-        value: https://highfashion-backend.onrender.com
+        value: https://dilwale-bags-backend.onrender.com
       - key: AUTH_CORS
-        value: https://highfashion-storefront.onrender.com,https://highfashion-backend.onrender.com
-      - key: SELF_PING_URL
-        value: https://highfashion-backend.onrender.com/health
-      - key: AUTO_SEED
-        value: "true"
-
-  # ----------------------------------------------------------------------------
-  # Next.js Storefront
-  # ----------------------------------------------------------------------------
-  - type: web
-    name: highfashion-storefront
-    runtime: image
-    image:
-      url: docker.io/steel777/highfashion-storefront:latest
-    plan: free
-    region: oregon
-    envVars:
-      - key: PORT
-        value: 8000
-      - key: NODE_ENV
-        value: production
-      - key: NODE_OPTIONS
-        value: "--max-old-space-size=384"
-      - key: NEXT_PUBLIC_DEFAULT_REGION
-        value: in
-      - key: NEXT_PUBLIC_MEDUSA_BACKEND_URL
-        value: https://highfashion-backend.onrender.com
-      - key: MEDUSA_BACKEND_URL
-        value: https://highfashion-backend.onrender.com
+        # Comma-separated Vercel + Render URLs, e.g. https://dilwale-bags.vercel.app,https://dilwale-bags-backend.onrender.com
+        sync: false
       - key: NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
         value: pk_a1b1a57e199157b891153b25fe6a027815989c7a87fdd5cc874612e8d6723a0c
       - key: SELF_PING_URL
-        value: https://highfashion-storefront.onrender.com
-
+        value: https://dilwale-bags-backend.onrender.com/health
+      - key: AUTO_SEED
+        value: "true"

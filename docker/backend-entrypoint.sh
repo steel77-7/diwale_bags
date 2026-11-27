@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-echo "==> [High Fashion Backend] Checking database connectivity and executing migrations..."
+echo "==> [Dilwale Bags Backend] Checking database connectivity and executing migrations..."
 
 # Wait for PostgreSQL to accept connections if host is provided
 if [ -n "$DATABASE_URL" ]; then
@@ -52,6 +52,6 @@ if [ -n "$SELF_PING_URL" ]; then
   ) &
 fi
 
-echo "==> [High Fashion Backend] Starting production server on port ${PORT:-9000}..."
+echo "==> [Dilwale Bags Backend] Starting production server on port ${PORT:-9000}..."
 exec "$@"
 
