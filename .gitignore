@@ -1,0 +1,57 @@
+# Dependencies
+**/node_modules
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Build & Framework Outputs
+**/.next/
+**/out/
+**/build/
+**/dist/
+**/.medusa/
+**/.turbo/
+**/uploads/
+**/tsconfig.tsbuildinfo
+**/*.tsbuildinfo
+next-env.d.ts
+
+# Environment Files
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.template
+
+# Vercel
+**/.vercel
+
+# Testing & Playwright
+coverage/
+playwright-report/
+test-results/
+.playwright-cli/
+
+# Verification Screenshots (workspace root only)
+/*.png
+
+# Logs & Debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS & Editors
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+.vscode/
+.idea/
+*.pem
+
