@@ -9,7 +9,6 @@ const brands = [
   { name: "ZARA", src: "/figma/9bd75.svg", width: 91, height: 38 },
   { name: "GUCCI", src: "/figma/653d6.svg", width: 156, height: 36 },
   { name: "PRADA", src: "/figma/b1cc1.svg", width: 194, height: 32 },
-  { name: "Calvin Klein", src: "/figma/861f0.svg", width: 206, height: 34 },
 ]
 
 export default function BrandTicker() {
